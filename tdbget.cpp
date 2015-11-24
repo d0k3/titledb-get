@@ -105,12 +105,12 @@ int main( int argc, char** argv )
         unsigned char* tentry = tentbl + 0xA8 + (t*0x2C);
         unsigned char* tinfo = tentbl + (*((int*) (tentry + 0x18)) * *((int*) (tentry + 0x1C)));
         printf("\n");
-        if ((tentry[0xF] != 0x00) || (tentry[0xE] != 0x04)) {
-            printf("%08X: entry #%i, tid %08X%08X -> invalid\n", tentry - titledb, t, *((unsigned int*) (tentry + 12)), *((unsigned int*) (tentry + 8)));
-            continue;
-        }
         printf("%08X: entry #%i, tid %08X%08X, index %i, active %i\n",
             tentry - titledb, t, *((unsigned int*) (tentry + 12)), *((unsigned int*) (tentry + 8)), *((int*) (tentry + 16)), *((int*) (tentry + 4)));
+        if ((tentry[0xF] != 0x00) || (tentry[0xE] != 0x04)) {
+            printf("%08X: -> invalid entry!\n", tentry - titledb);
+            continue;
+        }
         #ifdef SHOW_TITLE_INFO
         printf("%08X: info #%i, size %i, ver %i, tmd %i, cmd %i, code %.16s\n", tinfo - titledb, t,
             *((int*) (tinfo+0x0)), *((int*) (tinfo+0xC)), *((int*) (tinfo+0x14)), *((int*) (tinfo+0x18)), ((char*) tinfo) + 0x30);
