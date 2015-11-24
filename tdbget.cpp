@@ -102,7 +102,7 @@ int main( int argc, char** argv )
         unsigned char* tinfo = tentbl + (*((int*) (tentry + 0x18)) * *((int*) (tentry + 0x1C)));
         printf("\n");
         if ((tentry[0xF] != 0x00) || (tentry[0xE] != 0x04)) {
-            printf("%08X: entry #%i, tid %08X%08X -> invalid\n", tentry - titledb, t, *((unsigned int*) (tentry + 12)), *((unsigned int*) (tentry + 8)), t);
+            printf("%08X: entry #%i, tid %08X%08X -> invalid\n", tentry - titledb, t, *((unsigned int*) (tentry + 12)), *((unsigned int*) (tentry + 8)));
             continue;
         }
         printf("%08X: entry #%i, tid %08X%08X, index %i, active %i\n",
