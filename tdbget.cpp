@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define BUFFER_SIZE	(16 * 1024 * 1024)
-#define FORCE_PARTITION 0
+// #define FORCE_PARTITION 0
 #define SHOW_TITLE_INFO
 
 void showhelp_exit() {
