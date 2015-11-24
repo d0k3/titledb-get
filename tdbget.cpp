@@ -4,6 +4,7 @@
 
 #define BUFFER_SIZE	(16 * 1024 * 1024)
 // #define FORCE_PARTITION 0
+#define PARSE_TITLES
 #define SHOW_TITLE_INFO
 
 void showhelp_exit() {
@@ -95,6 +96,7 @@ int main( int argc, char** argv )
     }
     printf("%08X: entry table (%08X%08X) -> %i/%i entries\n", tentbl - titledb, *((unsigned int*) tentbl), *((unsigned int*) (tentbl + 4)), nten, ntenmax);
     
+    #ifdef PARSE_TITLES
     for (int t = 0; t < nten; t++) {
         unsigned char* tentry = tentbl + 0xA8 + (t*0x2C);
         unsigned char* tinfo = tentbl + (*((int*) (tentry + 0x18)) * *((int*) (tentry + 0x1C)));
@@ -110,6 +112,7 @@ int main( int argc, char** argv )
             *((int*) (tinfo+0x0)), *((int*) (tinfo+0xC)), *((int*) (tinfo+0x14)), *((int*) (tinfo+0x18)), ((char*) tinfo) + 0x30);
         #endif
     }
+    #endif
 	
 	free(titledb);
 	
