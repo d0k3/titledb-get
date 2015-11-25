@@ -93,7 +93,10 @@ int main( int argc, char** argv )
             printf("open %s failed!\n\n", argv[1]);
             return 0;
         }
-        fsize = fwrite(titledb, 1, BUFFER_SIZE, fp);
+        if (fwrite(titledb, 1, fsize, fp) != (unsigned) fsize) {
+            printf("file write failed!");
+            return 0;
+        }
         fclose(fp);
         printf("done!\n");
     } else {
