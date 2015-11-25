@@ -62,17 +62,7 @@ int main( int argc, char** argv )
     int size_ivfc_part = *((int*) (difi + 0xFC));
     int difi_flags = *((int*) (difi + 0x38));
     
-    // seek memory for 'NANDTDB' preheader
-    /*unsigned char* nandtdb = titledb;
-    int tdbsize = fsize;
-    for (int nfound = 0; tdbsize > 256; nandtdb++, tdbsize--) {
-        if ((memcmp(nandtdb, "NANDTDB", 7) == 0) || (memcmp(nandtdb, "NANDIDB", 7) == 0)) nfound++;
-        if (nfound == (ap+1)) break;
-    }
-    if (tdbsize <= 256) {
-        printf("actual database not found!\n\n");
-        return 0;
-    }*/
+    // decide position and check for 'NANDTDB' / 'NANDIDB' header
     unsigned char* nandtdb = titledb + offset_ivfc_lvl4 + offset_ivfc_part + offset_file_base + ((difi_flags) ? 0 : size_ivfc_part);
     if (memcmp(nandtdb, "NAND", 4) != 0) {
         printf("%08X: 'NAND' fail!\n\n", nandtdb - titledb);
